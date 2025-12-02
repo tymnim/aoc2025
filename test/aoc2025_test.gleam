@@ -19,5 +19,5 @@ L99
 R14
 L82"
 
-  assert day1.stage_one(start, input) == 3
+  assert day1.stage_one(start, input) == Ok(3)
 }
