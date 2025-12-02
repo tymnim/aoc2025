@@ -12,6 +12,8 @@ pub fn main() -> Nil {
       let assert Ok(content) = file_reader.read_file(filename)
       let assert Ok(counter) = day1.stage_one(50, string.trim(content))
       io.println("Stage One: " <> int.to_string(counter))
+      let assert Ok(counter) = day1.stage_two(50, string.trim(content))
+      io.println("Stage Two: " <> int.to_string(counter))
       Nil
     }
     _ -> io.println("Usage: gleam run day<n> <filename>")
