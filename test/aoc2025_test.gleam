@@ -75,3 +75,9 @@ pub fn day3_stage_one_test() {
 
   assert day3.stage_one(input) == Ok(357)
 }
+
+pub fn day3_stage_two_test() {
+  let input = "987654321111111\n811111111111119\n234234234234278\n818181911112111"
+
+  assert day3.stage_two(input) == Ok(3121910778619)
+}
