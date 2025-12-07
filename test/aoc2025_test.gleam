@@ -2,6 +2,7 @@ import gleeunit
 import day1
 import day2
 import day3
+import day4
 
 pub fn main() -> Nil {
   gleeunit.main()
@@ -80,4 +81,19 @@ pub fn day3_stage_two_test() {
   let input = "987654321111111\n811111111111119\n234234234234278\n818181911112111"
 
   assert day3.stage_two(input) == Ok(3121910778619)
+}
+
+pub fn day4_stage_one_test() {
+  let input = "..@@.@@@@.
+@@@.@.@.@@
+@@@@@.@.@@
+@.@@@@..@.
+@@.@@@@.@@
+.@@@@@@@.@
+.@.@.@.@@@
+@.@@@.@@@@
+.@@@@@@@@.
+@.@.@@@.@."
+
+  assert day4.stage_one(input) == Ok(13)
 }
