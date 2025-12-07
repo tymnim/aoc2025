@@ -2,7 +2,6 @@ import gleam/io
 import gleam/string
 import gleam/time/timestamp
 import gleam/int
-import gleam/float
 import argv
 import file_reader
 import day1
@@ -10,6 +9,7 @@ import day2
 import day3
 import day4
 import day5
+import day7
 
 pub fn main() -> Nil {
   io.println("Hello from aoc2025!")
@@ -58,7 +58,7 @@ pub fn main() -> Nil {
     }
     ["day7", filename] -> {
       let assert Ok(content) = file_reader.read_file(filename)
-      let assert Ok(res) = day5.stage_one(string.trim(content))
+      let assert Ok(res) = measure("First", fn () { day7.stage_one(string.trim(content)) })
       io.println("Stage One: " <> int.to_string(res))
       Nil
     }
