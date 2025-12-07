@@ -1,6 +1,8 @@
 import gleam/io
 import gleam/string
+import gleam/time/timestamp
 import gleam/int
+import gleam/float
 import argv
 import file_reader
 import day1
@@ -24,15 +26,15 @@ pub fn main() -> Nil {
       let assert Ok(content) = file_reader.read_file(filename)
       // let assert Ok(res) = day2.stage_one(string.trim(content))
       // io.println("Stage One: " <> int.to_string(res))
-      let assert Ok(res) = day2.stage_two(string.trim(content))
+      let assert Ok(res) = measure("Seocnd", fn () { day2.stage_two(string.trim(content)) })
       io.println("Stage Two: " <> int.to_string(res))
       Nil
     }
     ["day3", filename] -> {
       let assert Ok(content) = file_reader.read_file(filename)
-      let assert Ok(res) = day3.stage_one(string.trim(content))
+      let assert Ok(res) = measure("First", fn () { day3.stage_one(string.trim(content)) })
       io.println("Stage One: " <> int.to_string(res))
-      let assert Ok(res) = day3.stage_two(string.trim(content))
+      let assert Ok(res) = measure("Second", fn () { day3.stage_two(string.trim(content)) })
       io.println("Stage Two: " <> int.to_string(res))
       Nil
     }
@@ -44,13 +46,33 @@ pub fn main() -> Nil {
     }
     ["day5", filename] -> {
       let assert Ok(content) = file_reader.read_file(filename)
+      let assert Ok(res) = measure("First", fn () { day5.stage_one(string.trim(content)) })
+      io.println("Stage One: " <> int.to_string(res))
+      let assert Ok(res) = measure("Second", fn () { day5.stage_two(string.trim(content)) })
+      io.println("Stage Two: " <> int.to_string(res))
+      Nil
+    }
+    ["day6", _filename] -> {
+      todo "DAY 6"
+      Nil
+    }
+    ["day7", filename] -> {
+      let assert Ok(content) = file_reader.read_file(filename)
       let assert Ok(res) = day5.stage_one(string.trim(content))
       io.println("Stage One: " <> int.to_string(res))
-      let assert Ok(res) = day5.stage_two(string.trim(content))
-      io.println("Stage Two: " <> int.to_string(res))
       Nil
     }
     _ -> io.println("Usage: gleam run day<n> <filename>")
   }
+}
 
+fn measure(label, callback) {
+  let #(sseconds, snano) = timestamp.system_time() |> timestamp.to_unix_seconds_and_nanoseconds
+  let res = callback()
+  let #(eseconds, enano) = timestamp.system_time() |> timestamp.to_unix_seconds_and_nanoseconds
+  let seconds = eseconds - sseconds
+  let nano = enano - snano
+  let ms = {seconds * 1_000_000_000 + nano} / 1000000
+  io.println(label <> ": " <> int.to_string(ms) <> " ms")
+  res
 }
