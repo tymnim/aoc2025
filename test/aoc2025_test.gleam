@@ -226,3 +226,16 @@ pub fn day9_stage_one_test() {
 7,3"
   assert day9.stage_one(input) == Ok(50)
 }
+
+pub fn day9_stage_two_test() {
+  let input = "7,1
+11,1
+11,7
+9,7
+9,5
+2,5
+2,3
+7,3"
+  assert day9.stage_two(input) == Ok(24)
+}
+
